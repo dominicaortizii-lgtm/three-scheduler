@@ -26,6 +26,6 @@ cron.schedule("*/2 * * * *", () => hit("email", EMAIL, "/scan-inbox"));
 cron.schedule("0 */6 * * *", () => hit("outreach", OUTREACH, "/run-batch"));
 
 // Calendar: check completed meetings every 30 minutes
-cron.schedule("*/30 * * * *", () => hit("calendar", CALENDAR, "/check-completed-meetings"));
+cron.schedule("*/30 * * * *", () => { hit("calendar", CALENDAR, "/check-completed-meetings"); hit("calendar-hb", CALENDAR, "/check-completed-meetings-hb"); });
 
 console.log("[scheduler] Online — email/2min | outreach/6h | calendar/30min");
