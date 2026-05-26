@@ -23,7 +23,7 @@ async function hit(name, url, path) {
 cron.schedule("*/2 * * * *", () => hit("email", EMAIL, "/scan-inbox"));
 
 // Outreach: send emails every 6 hours
-cron.schedule("0 */6 * * *", () => hit("outreach", OUTREACH, "/send-outreach"));
+cron.schedule("0 */6 * * *", () => hit("outreach", OUTREACH, "/run-batch"));
 
 // Calendar: check completed meetings every 30 minutes
 cron.schedule("*/30 * * * *", () => hit("calendar", CALENDAR, "/check-completed-meetings"));
