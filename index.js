@@ -28,6 +28,7 @@ cron.schedule("0 */6 * * *", () => hit("outreach", OUTREACH, "/run-batch"));
 // Outreach table: weekdays 9am-5pm EST (2pm-10pm UTC), every hour
 cron.schedule("0 14-22 * * 1-5", () => hit("outreach-table", OUTREACH, "/run-outreach-table", { limit: 25 }));
 cron.schedule("30 14-22 * * 1-5", () => hit("outreach-queue", OUTREACH, "/run-outreach-queue", { limit: 10 }));
+cron.schedule("0 15 * * 1-5", () => hit("followups", OUTREACH, "/run-followups", {}));
 
 // Calendar: check completed meetings every 30 minutes
 cron.schedule("*/30 * * * *", () => { hit("calendar", CALENDAR, "/check-completed-meetings"); hit("calendar-hb", CALENDAR, "/check-completed-meetings-hb"); });
