@@ -36,11 +36,8 @@ cron.schedule("0 13-22 * * 1-5", () => hit("outreach-table", OUTREACH, "/run-out
 // Outreach queue: weekdays 9am-6pm ET, every hour at :30
 cron.schedule("30 13-22 * * 1-5", () => hit("outreach-queue", OUTREACH, "/run-outreach-queue", { limit: 10 }));
 
-// LinkedIn DMs: weekdays 10am + 3pm ET (14 + 19 UTC)
-cron.schedule("0 14,19 * * 1-5", () => hit("linkedin-dms", LINKEDIN, "/run", {}));
-
-// Instagram DMs: weekdays 11am ET (15 UTC)
-cron.schedule("0 15 * * 1-5", () => hit("instagram-dms", INSTAGRAM, "/run", {}));
+// LinkedIn + Instagram DMs: paused until Apollo.io integration (July 1)
+// Need profile_url field populated — Apollo will provide this on enrichment
 
 // Follow-ups: weekdays 10am ET (14 UTC)
 cron.schedule("0 14 * * 1-5", () => hit("followups", OUTREACH, "/run-followups", {}));
