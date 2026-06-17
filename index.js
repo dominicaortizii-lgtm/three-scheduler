@@ -4,7 +4,9 @@ const fetch = require("node-fetch");
 const EMAIL    = "https://three-email-agent-v2-production.up.railway.app";
 const OUTREACH = "https://three-outreach-agent-production.up.railway.app";
 const CALENDAR = "https://three-calendar-production.up.railway.app";
-const BRIEFING = "http://three-briefing-agent.railway.internal:8080";
+const BRIEFING  = "http://three-briefing-agent.railway.internal:8080";
+const LINKEDIN  = "https://three-linkedin-agent-production.up.railway.app";
+const INSTAGRAM = "https://three-instagram-agent-production.up.railway.app";
 async function hit(name, url, path, body = {}) {
   try {
     const r = await fetch(url + path, {
@@ -33,6 +35,12 @@ cron.schedule("0 13-22 * * 1-5", () => hit("outreach-table", OUTREACH, "/run-out
 
 // Outreach queue: weekdays 9am-6pm ET, every hour at :30
 cron.schedule("30 13-22 * * 1-5", () => hit("outreach-queue", OUTREACH, "/run-outreach-queue", { limit: 10 }));
+
+// LinkedIn DMs: weekdays 10am + 3pm ET (14 + 19 UTC)
+cron.schedule("0 14,19 * * 1-5", () => hit("linkedin-dms", LINKEDIN, "/run", {}));
+
+// Instagram DMs: weekdays 11am ET (15 UTC)
+cron.schedule("0 15 * * 1-5", () => hit("instagram-dms", INSTAGRAM, "/run", {}));
 
 // Follow-ups: weekdays 10am ET (14 UTC)
 cron.schedule("0 14 * * 1-5", () => hit("followups", OUTREACH, "/run-followups", {}));
