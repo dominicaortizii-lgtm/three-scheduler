@@ -4,8 +4,6 @@ const fetch = require("node-fetch");
 const EMAIL    = "https://three-email-agent-v2-production.up.railway.app";
 const OUTREACH = "https://three-outreach-agent-production.up.railway.app";
 const CALENDAR = "https://three-calendar-production.up.railway.app";
-const SOCIAL   = "https://three-social-agent-production.up.railway.app";
-
 async function hit(name, url, path, body = {}) {
   try {
     const r = await fetch(url + path, {
@@ -35,9 +33,7 @@ cron.schedule("30 13-22 * * 1-5", () => hit("outreach-queue", OUTREACH, "/run-ou
 // Follow-ups: weekdays 10am ET (14 UTC)
 cron.schedule("0 14 * * 1-5", () => hit("followups", OUTREACH, "/run-followups", {}));
 
-// Social posts: 9am ET (13 UTC) + 6pm ET (22 UTC), weekdays
-cron.schedule("0 13 * * 1-5", () => hit("social-morning", SOCIAL, "/post", {}));
-cron.schedule("0 22 * * 1-5", () => hit("social-evening", SOCIAL, "/post", {}));
+// Social posts: handled internally by three-social-agent (self-schedules 9am + 6pm ET)
 
 // Calendar: check completed meetings every 30 minutes (24/7)
 cron.schedule("*/30 * * * *", () => {
