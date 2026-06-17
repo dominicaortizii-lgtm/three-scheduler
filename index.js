@@ -5,8 +5,8 @@ const EMAIL    = "https://three-email-agent-v2-production.up.railway.app";
 const OUTREACH = "https://three-outreach-agent-production.up.railway.app";
 const CALENDAR = "https://three-calendar-production.up.railway.app";
 const BRIEFING  = "http://three-briefing-agent.railway.internal:8080";
-const LINKEDIN  = "http://three-linkedin-agent.railway.internal:3000";
-const INSTAGRAM = "http://three-instagram-agent.railway.internal:3000";
+const LINKEDIN  = "http://three-linkedin-agent.railway.internal:8080";
+const INSTAGRAM = "http://three-instagram-agent.railway.internal:8080";
 async function hit(name, url, path, body = {}) {
   try {
     const r = await fetch(url + path, {
