@@ -22,25 +22,25 @@ async function hit(name, url, path, body = {}) {
 }
 
 // Briefing: 7am ET (11 UTC), daily
-cron.schedule("0 11 * * *", () => hit("briefing", BRIEFING, "/run-briefing", {}));
+cron.schedule("0 7 * * *", () => hit("briefing", BRIEFING, "/run-briefing", {}), { timezone: "America/New_York" });
 
 // Email: scan inbox every 2 minutes (24/7 — always on)
 cron.schedule("*/2 * * * *", () => hit("email", EMAIL, "/scan-inbox"));
 
 // Outreach batch (deals): weekdays 9am-6pm ET (13-22 UTC)
-cron.schedule("0 13-22 * * 1-5", () => hit("outreach-batch", OUTREACH, "/run-batch"));
+cron.schedule("0 9-17 * * 1-5", () => hit("outreach-batch", OUTREACH, "/run-batch"), { timezone: "America/New_York" });
 
 // Outreach table: weekdays 9am-6pm ET (13-22 UTC), every hour
-cron.schedule("0 13-22 * * 1-5", () => hit("outreach-table", OUTREACH, "/run-outreach-table", { limit: 25 }));
+cron.schedule("0 9-17 * * 1-5", () => hit("outreach-table", OUTREACH, "/run-outreach-table", { limit: 25 }), { timezone: "America/New_York" });
 
 // Outreach queue: weekdays 9am-6pm ET, every hour at :30
-cron.schedule("30 13-22 * * 1-5", () => hit("outreach-queue", OUTREACH, "/run-outreach-queue", { limit: 10 }));
+cron.schedule("30 9-17 * * 1-5", () => hit("outreach-queue", OUTREACH, "/run-outreach-queue", { limit: 10 }), { timezone: "America/New_York" });
 
 // LinkedIn + Instagram DMs: paused until Apollo.io integration (July 1)
 // Need profile_url field populated — Apollo will provide this on enrichment
 
 // Follow-ups: weekdays 10am ET (14 UTC)
-cron.schedule("0 14 * * 1-5", () => hit("followups", OUTREACH, "/run-followups", {}));
+cron.schedule("0 10 * * 1-5", () => hit("followups", OUTREACH, "/run-followups", {}), { timezone: "America/New_York" });
 
 // Social posts: handled internally by three-social-agent (self-schedules 9am + 6pm ET)
 
