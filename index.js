@@ -35,6 +35,8 @@ cron.schedule("0 9-17 * * 1-5", () => hit("outreach-table", OUTREACH, "/run-outr
 
 // Outreach queue: weekdays 9am-6pm ET, every hour at :30
 cron.schedule("30 9-17 * * 1-5", () => hit("outreach-queue", OUTREACH, "/run-outreach-queue", { limit: 10 }), { timezone: "America/New_York" });
+// Freight priority lane — fires on the hour, before the :30 general run, reserving budget for named freight leads
+cron.schedule("0 9-17 * * 1-5", () => hit("freight-lane", OUTREACH, "/run-outreach-queue", { limit: 15, source: "prospecting_freight*" }), { timezone: "America/New_York" });
 
 // LinkedIn + Instagram DMs: paused until Apollo.io integration (July 1)
 // Need profile_url field populated — Apollo will provide this on enrichment
