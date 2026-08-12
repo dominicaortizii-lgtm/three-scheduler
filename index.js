@@ -27,12 +27,6 @@ cron.schedule("0 7 * * *", () => hit("briefing", BRIEFING, "/run-briefing", {}),
 // Email: scan inbox every 2 minutes (24/7 — always on)
 cron.schedule("*/2 * * * *", () => hit("email", EMAIL, "/scan-inbox"));
 
-// Outreach batch (deals): weekdays 9am-6pm ET (13-22 UTC)
-cron.schedule("0 9-17 * * 1-5", () => hit("outreach-batch", OUTREACH, "/run-batch"), { timezone: "America/New_York" });
-
-// Outreach table: weekdays 9am-6pm ET (13-22 UTC), every hour
-cron.schedule("0 9-17 * * 1-5", () => hit("outreach-table", OUTREACH, "/run-outreach-table", { limit: 25 }), { timezone: "America/New_York" });
-
 // Outreach queue: weekdays 9am-6pm ET, every hour at :30
 cron.schedule("30 9-17 * * 1-5", () => hit("outreach-queue", OUTREACH, "/run-outreach-queue", { limit: 10 }), { timezone: "America/New_York" });
 // Freight priority lane — fires on the hour, before the :30 general run, reserving budget for named freight leads
